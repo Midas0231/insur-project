@@ -1,0 +1,78 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}JZIB Insurance Company{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .navbar-item {
+            display: flex;
+        }
+
+        .  {
+            margin-left: auto;
+        }
+        a {
+            text-decoration: none;
+            color:white;
+        }
+        p{
+            font-size: 18px;
+        }
+        
+        #header{
+            border-style: solid;
+            border-color: white; 
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+       
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar">
+    <div class="container " style="">
+        <h1 class = "text-center" id = "header"> JZIB Insurance</h1>
+    </div>
+</nav>
+<div class="container" style="">
+   
+    <p>Welcome to JZIB Insurance Co., your trusted partner in insurance. We offer a wide range of insurance products to meet your needs. Whether you're looking for auto insurance, home insurance, or life insurance, we've got you covered. Our team of experienced professionals is here to help you find the right coverage at the right price.</p>
+    <p>Explore our website to learn more about our products and services. If you have any questions, please don't hesitate to contact us.</p>
+    
+    <img style = "margin-top: 10px; margin-bottom: 10px;" src="https://images.pexels.com/photos/220201/pexels-photo-220201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Insurance Image" style="width:100%; height: 400px;">
+    <h2> I am Customer </h2>
+    
+    <div class="row mt-5">
+        <div class="col-sm-4">
+            <a href="/get_quote" class="btn btn-primary btn-lg btn-block">Get a Quote</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="/purchase" class="btn btn-primary btn-lg btn-block">Purchase</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-primary btn-lg btn-block">Product List</a>
+        </div>
+    </div>
+
+    <h2> I am Associate </h2>
+    <div class="row mt-5">
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-primary btn-lg btn-block">View statistics </a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-primary btn-lg btn-block"> Connect to customer</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-primary btn-lg btn-block">Retrain model</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

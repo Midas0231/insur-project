@@ -1,4 +1,5 @@
 import pymysql
+import csv 
 # Establish a connection to the database
 db = pymysql.connect(
     host='insurance-database.cdcuzzna0mo5.us-east-2.rds.amazonaws.com',
@@ -12,38 +13,46 @@ db = pymysql.connect(
 cursor = db.cursor()
 
 # CUSTOMER: 
-# CREATE TABLE customer (
-#     ssn VARCHAR(255) PRIMARY KEY,
-#     name VARCHAR(255),
-#     age INT,
-#     gender VARCHAR(255),
-#     income FLOAT,
-#     health_rating INT,
-#     nChildren INT,
-#     married BOOLEAN
-# );
-
-# Execute a SQL query
-def queryExcutor():
-    query = '''GRANT SUPER ON insdb.* TO 'admin'@'%';'''
-    cursor.execute(query)
-    
-    query = '''FLUSH PRIVILEGES;'''
-    cursor.execute(query)
-    
-    query = 'SET GLOBAL local_infile=1;'
-    cursor.execute(query)
-    query = '''
-        LOAD DATA LOCAL INFILE './example.csv'
-        INTO TABLE customer
-        FIELDS TERMINATED BY ','
-        LINES TERMINATED BY '\n'
-        IGNORE 1 ROWS;'''
-    cursor.execute(query)
+def createTableCustomer():
+    cursor.execute('''DROP TABLE IF EXISTS customer''')
+    q = """CREATE TABLE customer (
+    ssn VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255),
+    age INT,
+    gender VARCHAR(255),
+    income FLOAT,
+    health_rating INT,
+    nChildren INT,
+    married BOOLEAN,
+    purchased BOOLEAN
+    );
+    """
+    cursor.execute(q)
     results = cursor.fetchall()
     print(results)
 
-queryExcutor()
+# createTableCustomer()
 
+# Execute a SQL query
+def InsertAll_Customer():
+    f = csv.reader(open('example.csv'))
+    next(f)
+    q = """INSERT INTO customer(ssn,name, age, gender, income, health_rating, nChildren, married,purchased) 
+                        VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+    for line in f:
+        line = [None if cell == '' else cell for cell in line]
+        cursor.execute(q, line)
+       
+
+# InsertAll_Customer()
+# cursor.execute(q)
+print("""FETCHING ------------- \n\n\n""")
+q = '''SELECT * FROM customer'''
+cursor.execute(q)
+results = cursor.fetchall()
+print(results)
+
+
+db.commit()
 cursor.close()
 db.close()

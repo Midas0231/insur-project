@@ -32,8 +32,8 @@ def generateRandomData(amount = 1000):
         income = round(random.uniform(80000, 200000), 2)
         health_rating = random.randint(1,100)
         nChildren = random.randint(0,3)
-        married = random.choice([True,False])
-        purchased = pFactor * (age/50) * (income/140000) * (80 / health_rating) > 1.5
+        married = random.choice([1,0])
+        purchased = 1 if pFactor * (age/50) * (income/140000) * (80 / health_rating) > 1.5 else 0
         if purchased: 
             wCnt += 1
         data.append([ssn,name,age,gender,income,health_rating,nChildren,married,purchased])
@@ -48,8 +48,8 @@ def generateRandomData(amount = 1000):
         income = round(random.uniform(40000, 80000), 2)
         health_rating = random.randint(1,100)
         nChildren = random.randint(0,3)
-        married = random.choice([True,False])
-        purchased = pFactor * (age/50) * (income/60000) * (80 / health_rating) > 1.5
+        married = random.choice([1,0])
+        purchased = 1 if pFactor * (age/50) * (income/60000) * (80 / health_rating) > 1.5 else 0
         if purchased: 
             mCnt += 1
         data.append([ssn,name,age,gender,income,health_rating,nChildren,married,purchased])
@@ -65,8 +65,8 @@ def generateRandomData(amount = 1000):
         income = round(random.uniform(20000, 40000), 2)
         health_rating = random.randint(1,100)
         nChildren = random.randint(0,3)
-        married = random.choice([True,False])
-        purchased = pFactor * (age/50) * (income/30000) * (80 / health_rating) > 1.5
+        married = random.choice([1,0])
+        purchased = 1 if pFactor * (age/50) * (income/30000) * (80 / health_rating) > 1.5 else 0
         if purchased: 
             pCnt += 1
         data.append([ssn,name,age,gender,income,health_rating,nChildren,married,purchased])
