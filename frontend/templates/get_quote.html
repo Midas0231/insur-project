@@ -1,6 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}JZIB Insurance Company{% endblock %}
+
 {% block styles %}
     {{ super() }}
     <style>
@@ -29,13 +30,21 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
-       
+        .login-button{
+            border-style: solid;
+            border-color: white;
+            background: black;
+        }
+        .black-and-white{
+            background-color: black;
+            color: white;
+        }
     </style>
 {% endblock %}
 {% block content %}
 <nav class="navbar">
     <div class="container " style="">
-        <h1 class = "text-center" id = "header"> JZIB Insurance</h1>
+        <a href = "/"> <h1 class = "text-center" id = "header"> JZIB Insurance</h1></a>
     </div>
 </nav>
 
@@ -44,23 +53,23 @@
 
         <div class="form-group">
             {{ form.age.label }}
-            {{ form.age(class="form-control") }}
+            {{ form.age(class="form-control black-and-white ") }}
         </div>
         <div class="form-group">
             {{ form.gender.label }}
-            {{ form.gender(class="form-control") }}
+            {{ form.gender(class="form-control black-and-white") }}
         </div>
         <div class="form-group">
             {{ form.income.label }}
-            {{ form.income(class="form-control") }}
+            {{ form.income(class="form-control black-and-white") }}
         </div>
         <div class="form-group">
             {{ form.health_rating.label }}
-            {{ form.health_rating(class="form-control") }}
+            {{ form.health_rating(class="form-control black-and-white") }}
         </div>
         <div class="form-group">
             {{ form.nChildren.label }}
-            {{ form.nChildren(class="form-control") }}
+            {{ form.nChildren(class="form-control black-and-white") }}
         </div>
         <div class="form-group">
             {{ form.married.label }}
@@ -70,11 +79,13 @@
             {{ form.purchased.label }}
             {{ form.purchased(class="form-check-input") }}
         </div>
-
+       <button type="submit" class="btn btn-SECOND btn-lg btn-block login-button">Get Quote</button>
         {% if quote %}
-             <h2>Your quote is: ${{ quote }}</h2>
+             <h2>Here is your plan: </h2>
+             <h3> Premium: ${{ quote }} /month </h3>
+             <h3> Benefit: ${{ quote * 100 }} </h3>
+             <a href = "/purchase" class = "btn btn-success btn-lg btn-block">Purchase Now</a>
         {% endif %}
-        <button type="submit" class="btn btn-primary">Get Quote</button>
 
         
     </form>

@@ -1,0 +1,118 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}JZIB Insurance Company{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .navbar-item {
+            display: flex;
+        }
+
+        .  {
+            margin-left: auto;
+        }
+        a, a:hover{
+            text-decoration: none;
+            color:white;
+        }
+        p{
+            font-size: 18px;
+        }
+        
+        #header{
+            border-style: solid;
+            border-color: white; 
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .login-button{
+            border-style: solid;
+            border-color: white;
+            background: black;
+        }
+       
+    </style>
+{% endblock %}
+{% block content %}
+<nav class="navbar">
+    <div class="container " style="">
+        <a href = "/"> <h1 class = "text-center" id = "header"> JZIB Insurance</h1></a>
+    </div>
+</nav>
+
+<div class="container">
+    <form method="POST" action="{{ url_for('purchase')}}">
+        
+        <div class="form-group">
+            {{ regForm.AccID.label }}
+            {{ regForm.AccID(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.password.label }}
+            {{ regForm.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.email.label }}
+            {{ regForm.email(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.name.label }}
+            {{ regForm.name(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ regForm.age.label }}
+            {{ regForm.age(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.gender.label }}
+            {{ regForm.gender(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.income.label }}
+            {{ regForm.income(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.health_rating.label }}
+            {{ regForm.health_rating(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.nChildren.label }}
+            {{ regForm.nChildren(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.married.label }}
+            {{ regForm.married(class="form-check-input") }}
+        </div>
+        <div class="form-group">
+            {{ regForm.purchased.label }}
+            {{ regForm.purchased(class="form-check-input") }}
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary">Register</button>
+
+       
+    </form>
+    {% if regForm.name.data %}
+        <h2>Hello, {{regForm.name.data}}</h2>
+        <div class="form-group">
+            {{ pForm.plan.label }}
+            {{ pForm.plan(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ pForm.amount.label }}
+            {{ pForm.amount(class="form-control") }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Purchase</button>
+
+    
+    {% endif %}
+</div>
+{% endblock %}

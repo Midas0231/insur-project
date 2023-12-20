@@ -15,7 +15,7 @@
         .  {
             margin-left: auto;
         }
-        a {
+        a, a:hover {
             text-decoration: none;
             color:white;
         }
@@ -29,84 +29,68 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+        .black-and-white{
+            background-color: black;
+            color: white;
+        }
+        
        
     </style>
 {% endblock %}
 {% block content %}
+
+
 <nav class="navbar">
     <div class="container " style="">
-        <h1 class = "text-center" id = "header"> JZIB Insurance</h1>
+        <a href = "/"> <h1 class = "text-center" id = "header"> JZIB Insurance</h1></a>
     </div>
 </nav>
-
-<div class="container">
-    <form method="POST" action="{{ url_for('purchase')}}">
-        
-        <div class="form-group">
-            {{ regForm.AccID.label }}
-            {{ regForm.AccID(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.password.label }}
-            {{ regForm.password(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.email.label }}
-            {{ regForm.email(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.name.label }}
-            {{ regForm.name(class="form-control") }}
-        </div>
-
-        <div class="form-group">
-            {{ regForm.age.label }}
-            {{ regForm.age(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.gender.label }}
-            {{ regForm.gender(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.income.label }}
-            {{ regForm.income(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.health_rating.label }}
-            {{ regForm.health_rating(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.nChildren.label }}
-            {{ regForm.nChildren(class="form-control") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.married.label }}
-            {{ regForm.married(class="form-check-input") }}
-        </div>
-        <div class="form-group">
-            {{ regForm.purchased.label }}
-            {{ regForm.purchased(class="form-check-input") }}
-        </div>
-
-        
-        <button type="submit" class="btn btn-primary">Register</button>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // get the selection field
+    var select = $("select[name='plan']");
+    
+    // add a change event handler
+    select.change(function() {
        
-    </form>
-    {% if regForm.name.data %}
-        <h2>Hello, {{regForm.name.data}}</h2>
+      // get the selected value
+      var value = select.val();
+      // update the quote value based on some logic
+      var quote = {{quote}};
+      if (value == "planA") {
+        quote = quote ;
+      } else if (value == "planB") {
+        quote = quote * 1.5;
+      } else if (value == "planC") {
+        quote = quote * 2;
+      }
+      // update the text elements that display the quote value
+      $("#quote").text("Premium: $" + quote + " /month");
+      $("#benefit").text("Benefit: $" + quote * 100);
+    });
+  });
+</script>
+<div class="container">
+    
+    {% if session['LOGGED_IN'] %}
+   
+    <form method="POST" action="{{ url_for('purchase')}}">
+        <h2>Hello, Here is your plan: </h2>
+        <h3 id = "quote"> Premium: ${{ quote }} /month </h3>
+        <h3 id = "benefit"> Benefit: ${{ quote * 100 }} </h3>
+        
         <div class="form-group">
             {{ pForm.plan.label }}
-            {{ pForm.plan(class="form-control") }}
+            {{ pForm.plan(class="form-control black-and-white") }}
         </div>
-        <div class="form-group">
-            {{ pForm.amount.label }}
-            {{ pForm.amount(class="form-control") }}
-        </div>
+   
 
-        <button type="submit" class="btn btn-primary">Purchase</button>
-
-    
+        <button type="submit" class="btn btn-success">Purchase</button>
+    </form>
+    {% else %}
+        LOG IN FIRST! 
+        <a href = "/login" class = "btn btn-primary">LOGIN </a>
     {% endif %}
 </div>
 {% endblock %}

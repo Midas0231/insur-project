@@ -1,5 +1,4 @@
 {% extends 'bootstrap/base.html' %}
-
 {% block title %}JZIB Insurance Company{% endblock %}
 
 {% block styles %}
@@ -16,7 +15,7 @@
         .  {
             margin-left: auto;
         }
-        a {
+        a, a:hover {
             text-decoration: none;
             color:white;
         }
@@ -30,7 +29,12 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
-       
+        
+        .login-button{
+            border-style: solid;
+            border-color: white;
+            background: black;
+        }
     </style>
 {% endblock %}
 
@@ -38,7 +42,7 @@
 
 <nav class="navbar">
     <div class="container " style="">
-        <h1 class = "text-center" id = "header"> JZIB Insurance</h1>
+        <a href = "/"> <h1 class = "text-center" id = "header"> JZIB Insurance</h1></a>
     </div>
 </nav>
 <div class="container" style="">
@@ -47,30 +51,44 @@
     <p>Explore our website to learn more about our products and services. If you have any questions, please don't hesitate to contact us.</p>
     
     <img style = "margin-top: 10px; margin-bottom: 10px;" src="https://images.pexels.com/photos/220201/pexels-photo-220201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Insurance Image" style="width:100%; height: 400px;">
-    <h2> I am Customer </h2>
+    <h2> I am Customer 
+        {% if session["LOGGED_IN"] %}
+        <a href="/logout" class="login-button btn" style = "">
+            Log out
+        </a>
+
+        {% else %}
+        <a href="/login" class="login-button btn" style = "">
+            Log in
+        </a>
+        {%endif%}
+    </h2>
     
     <div class="row mt-5">
-        <div class="col-sm-4">
-            <a href="/get_quote" class="btn btn-primary btn-lg btn-block">Get a Quote</a>
+        <div class="col-sm-6">
+            <a href="/get_quote" class="btn btn-secondary btn-lg btn-block login-button">Get a Quote</a>
         </div>
-        <div class="col-sm-4">
-            <a href="/purchase" class="btn btn-primary btn-lg btn-block">Purchase</a>
+        
+
+        <div class="col-sm-6">
+            
+            <a href="#" class="btn btn-secondary btn-lg btn-block login-button">My Products</a>
+
+            
         </div>
-        <div class="col-sm-4">
-            <a href="#" class="btn btn-primary btn-lg btn-block">Product List</a>
-        </div>
+        
     </div>
 
     <h2> I am Associate </h2>
     <div class="row mt-5">
         <div class="col-sm-4">
-            <a href="#" class="btn btn-primary btn-lg btn-block">View statistics </a>
+            <a href="#" class="btn btn-secondary btn-lg btn-block login-button">View statistics </a>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="btn btn-primary btn-lg btn-block"> Connect to customer</a>
+            <a href="#" class="btn btn-secondary btn-lg btn-block login-button"> Connect to customer</a>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="btn btn-primary btn-lg btn-block">Retrain model</a>
+            <a href="#" class="btn btn-secondary btn-lg btn-block login-button">Retrain model</a>
         </div>
     </div>
 
