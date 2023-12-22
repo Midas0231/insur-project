@@ -152,6 +152,30 @@ def purchase():
     return render_template('purchase.html', pForm = pForm, quote = quote)
 
 
+########### MY PRODUCTS #####################
+@app.route('/my_products', methods=['GET', 'POST'])
+def my_products():
+    products = []
+    
+    for i in range(10):
+        name = "A"+str(i)
+        price = str(10000+i)
+        
+        description = "THIS IS PRODUCT A " + str(i)
+        products.append({
+            'name': name,
+            'price': price,
+            'description': description
+        })
+    return render_template('my_products.html', products = products)
+
+
+########### manage #####################
+@app.route('/manage', methods=['GET', 'POST'])
+def manage():
+    
+    
+    return render_template('manage.html')
 
 
 
